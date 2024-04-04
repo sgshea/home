@@ -9,19 +9,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, ... } @ inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."sammy" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."sammy" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+        };
 
         modules = [
            ./home.nix 
-           ];
+        ];
       };
     };
 }
