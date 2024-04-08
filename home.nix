@@ -3,13 +3,14 @@
 {
 
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    ./nvim
   ];
 
-  home.username = "sammy";
-  home.homeDirectory = "/var/home/sammy";
-
-  home.stateVersion = "23.11";
+  home = {
+    username = "sammy";
+    homeDirectory = "/var/home/sammy";
+    stateVersion = "23.11";
+  };
 
   home.packages = with pkgs; [
     ripgrep
@@ -87,110 +88,6 @@
     lazygit.enable = true;
   };
 
-  # Configuring neovim using nixvim
-  programs.nixvim = {
-    enable = true;
-
-    colorschemes.gruvbox.enable = true;
-
-    # Set <space> as leader key
-    globals = {
-      mapleader = " ";
-      maplocalleader = " ";
-    };
-
-    opts = {
-      clipboard = {
-        # Sync with OS clipboard
-        register = "unnamedplus";
-        # Clipboard providers
-        providers.wl-copy.enable = true; # wayland
-        providers.xclip.enable = true; # x
-      };
-
-      number = true;
-      showmode = false;
-      undofile = true;
-      shiftwidth = 4;
-    };
-
-    plugins = {
-      # Statusline
-      lualine.enable = true;
-      # "gc" to comment out visual regions/lines
-      comment.enable = true;
-
-      gitsigns = {
-        enable = true;
-        settings.signs = {
-          add.text = "+";
-          change.text = "~";
-          delete.text = "_";
-          topdelete.text = "‾";
-          changedelete.text = "~";
-        };
-      };
-
-      # Telescope is a fuzzy finder for files, buffers, etc.
-      # <leader>ff to find files
-      # <leader>fg to find in files
-      # <leader>fb to find buffers
-      # <leader>fh to find help tags
-      # While in insert mode: <c-/> to bring up keymaps
-      # While in normal mode: ?
-      telescope.enable = true;
-
-      lsp = {
-        enable = true;
-
-        keymaps = {
-          silent = true;
-
-          diagnostic = {
-            "<leader>k" = "goto_prev";
-            "<leader>j" = "goto_next";
-          };
-
-          lspBuf = {
-            gd = "definition";
-            gD = "references";
-            gt = "type_definition";
-            gi = "implementation";
-            K = "hover";
-            "<F2>" = "rename";
-          };
-        };
-
-        servers = {
-          clangd.enable = true;
-        };
-      };
-    };
-
-    keymaps = [
-      # Keymaps for Telescope
-      {
-        mode = "n";
-        key = "<leader>ff";
-        action = "Telescope find_files";
-      }
-      {
-        mode = "n";
-        key = "<leader>fg";
-        action = "Telescope live_grep";
-      }
-      {
-        mode = "n";
-        key = "<leader>fb";
-        action = "Telescope buffers";
-      }
-      {
-        mode = "n";
-        key = "<leader>fh";
-        action = "Telescope help_tags";
-      }
-    ];
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
