@@ -36,8 +36,8 @@
       # Statusline
       lualine.enable = true;
       bufferline.enable = true;
-      # "gc" to comment out visual regions/lines
       comment.enable = true;
+      nvim-autopairs.enable = true;
 
       gitsigns = {
         enable = true;
@@ -57,6 +57,12 @@
         autoReloadOnWrite = true;
       };
 
+      toggleterm = {
+	enable = true;
+	openMapping = "<C-t>";
+	direction = "horizontal";
+      };
+
       # Telescope is a fuzzy finder for files, buffers, etc.
       # <leader>ff to find files
       # <leader>fg to find in files
@@ -71,6 +77,9 @@
         "<leader>fb" = "buffers";
         "<leader>fh" = "help_tags";
       };
+      
+      # GitHub Copilot: run :CopilotSetup to set up
+      copilot-vim.enable = true;
 
       wilder = {
         enable = true;

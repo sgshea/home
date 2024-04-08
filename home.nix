@@ -23,12 +23,13 @@
     nix-info
     nix-health
 
-    neofetch
+    fastfetch
   ];
 
   home.shellAliases = {
     g = "git";
     lg = "lazygit";
+    fastfetch = "fastfetch -c 'examples/10'";
   };
 
   programs = {
