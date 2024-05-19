@@ -12,6 +12,8 @@
     stateVersion = "23.11";
   };
 
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     ripgrep
     fd
@@ -24,6 +26,10 @@
     nix-health
 
     fastfetch
+
+    (pkgs.nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; })
+
+    cargo
   ];
 
   home.shellAliases = {
