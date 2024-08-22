@@ -9,7 +9,7 @@
   home = {
     username = "sammy";
     homeDirectory = "/var/home/sammy";
-    stateVersion = "23.11";
+    stateVersion = "24.05";
   };
 
   fonts.fontconfig.enable = true;
@@ -19,6 +19,7 @@
     fd
     sd
     tree
+    just
 
     cachix
     nil
@@ -30,6 +31,10 @@
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; })
 
     cargo
+
+    ollama
+
+    racket
   ];
 
   home.shellAliases = {

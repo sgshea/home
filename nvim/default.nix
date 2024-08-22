@@ -59,8 +59,7 @@
 
       toggleterm = {
 	enable = true;
-	openMapping = "<C-t>";
-	direction = "horizontal";
+	settings.open_mapping = "[[<c-t>]]";
       };
 
       # Telescope is a fuzzy finder for files, buffers, etc.
@@ -77,9 +76,6 @@
         "<leader>fb" = "buffers";
         "<leader>fh" = "help_tags";
       };
-      
-      # GitHub Copilot: run :CopilotSetup to set up
-      copilot-vim.enable = true;
 
       wilder = {
         enable = true;
