@@ -2,14 +2,12 @@
 
 {
 
-  imports = [
-    ./nvim
-  ];
+  imports = [ ./nvim ];
 
   home = {
     username = "sammy";
     homeDirectory = "/var/home/sammy";
-    stateVersion = "24.05";
+    stateVersion = "24.11";
   };
 
   fonts.fontconfig.enable = true;
@@ -29,12 +27,6 @@
     fastfetch
 
     (pkgs.nerdfonts.override { fonts = [ "FiraCode" "Hack" ]; })
-
-    cargo
-
-    ollama
-
-    racket
   ];
 
   home.shellAliases = {
@@ -44,11 +36,20 @@
   };
 
   programs = {
+
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        set fish_greeting # Disable greeting
+      '';
+      plugins = [ ];
+    };
+
     bash = {
       enable = true;
       initExtra = ''
         # Make Nix and home-manager installed things available in PATH.
-        export PATH=/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:$PATH
+        export PATH=/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:$USER/.local/bin:$PATH
       '';
     };
 
@@ -56,7 +57,7 @@
       enable = true;
       envExtra = ''
         # Make Nix and home-manager installed things available in PATH.
-        export PATH=/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:$PATH
+        export PATH=/run/current-system/sw/bin/:/nix/var/nix/profiles/default/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:$USER/.local/bin:$PATH
       '';
     };
 
@@ -94,12 +95,9 @@
       nix-direnv.enable = true;
     };
 
-    git = {
-      enable = true;
-    };
+    git = { enable = true; };
     lazygit.enable = true;
   };
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
